@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="tx-form-page">
+    <h2>Add Funds to {{ wallet.name }}</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.amount.label_tag }}
+      {{ form.amount }}
+      <button type="submit" class="btn-submit">Add Funds</button>
+      <a href="{% url 'wallet_detail' wallet.id %}" class="btn-cancel">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

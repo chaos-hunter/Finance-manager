@@ -1,0 +1,290 @@
+/* reset & base */
+* { box-sizing: border-box; margin:0; padding:0; }
+body {
+  font-family: sans-serif;
+  background: #f0f4f8;
+  color: #333;
+  overflow-x: hidden;
+}
+header {
+  padding: 1rem;
+  background: #4e54c8;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width: 480px) {
+  body {
+    font-size: 0.9rem;    /* slightly smaller text on phones */
+  }
+  .wallet-card {
+    padding: 0.75rem;     /* a bit less padding so cards don’t get too tall */
+  }
+  .wallet-icon {
+    width: 80px; height: 60px;  /* shrink the icon */
+  }
+  header nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+@media (max-width: 600px) {
+  header nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+h1, h2 { font-size: 1.5rem; }
+main, .wallet-grid {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
+  gap: 1.5rem;
+  justify-items: center;
+  margin: auto;
+}
+.wallet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+/* "Create New Wallet" button on dashboard */
+.btn-create-wallet {
+  background: #ff7e5f;
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.btn-create-wallet:hover { opacity: 0.9; }
+
+/* Wallet icon + card */
+.wallet-card {
+  background: #fff;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+  width: 100%;
+}
+/* red “danger” button */
+.btn-delete {
+  background: #e53e3e;
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+.btn-delete:hover {
+  background: #c53030;
+}
+
+.wallet-card:hover { transform: translateY(-4px); }
+.wallet-label {
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+.wallet-total {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+.wallet-icon {
+  width: 100px;
+  height: 70px;
+  margin: 0 auto 0.5rem;
+  position: relative;
+  background: #ffd166;
+  border-radius: 8px;
+  box-shadow: inset 0 -8px 0 rgba(0,0,0,0.1);
+}
+.wallet-icon::before {
+  content: '';
+  position: absolute;
+  top: 8px; left: 10px;
+  width: 20px; height: 12px;
+  border: 2px solid #333;
+  border-radius: 3px;
+  background: #fff;
+}
+.wallet-icon::after {
+  content: '';
+  position: absolute;
+  bottom: -5px; right: 10px;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: #333;
+}
+
+/* Wallet detail page */
+.wallet-detail {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+.wallet-detail-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.btn-add {
+  background: #28a745;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.btn-add:hover { opacity: 0.9; }
+
+.history-list {
+  list-style: none;
+  padding: 0;
+}
+.history-list li {
+  background: #fff;
+  margin-bottom: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* Transaction Form styling */
+.tx-form-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 300px;
+  margin: 2rem auto;
+}
+.tx-form-page label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+}
+.tx-form-page input {
+  padding: 0.5rem;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+}
+.btn-submit, .btn-cancel {
+  width: 100%;
+  text-align: center;
+  padding: 0.6rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+}
+.btn-submit { background: #ff7e5f; color: #fff; }
+.btn-cancel { background: #aaa; color: #fff; }
+/* —— Login page centering —— */
+body.login-page {
+  display: flex;
+  flex-direction: column;    /* keep header/footer stacked */
+  min-height: 100vh;
+}
+body.login-page main {
+  flex: 1;                   /* take all remaining vertical space */
+  display: flex;
+  align-items: center;       /* center the <main> content vertically */
+  justify-content: center;   /* center horizontally */
+}
+/* —— Position the eye inside the password field —— */
+.password-field {
+  position: relative;
+  width: 100%;
+}
+.password-field input {
+  padding-right: 2.5rem; /* room for the icon */
+}
+.password-field .toggle-eye {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.form-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 360px;
+  box-sizing: border-box;
+}
+
+.form-container h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.form-container label {
+  display: block;
+  margin-top: 1rem;
+  color: #555;
+}
+
+.form-container input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-container button {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  background: #ff7e5f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.form-container button:hover {
+  background: #e66950;
+}
+.alert-danger {
+  background: #ffe6e6;
+  border: 1px solid #ff4c4c;
+  color: #a80000;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  margin-top: auto; /* pushes it to the bottom in a flex column */
+}
