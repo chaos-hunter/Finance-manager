@@ -12,8 +12,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(dotenv_path=BASE_DIR / ".env")
 # ─── SECURITY ────────────────────────────────────────────────────────────────
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "fallback‑dev‑key")
-DEBUG      = os.getenv("DJANGO_DEBUG", "False") == "True"
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "").split(",")
+
+DEBUG = os.environ.get("DEBUG", "False") == "True"
+
+ALLOWED_HOSTS = [
+    "finance-wallet-709eb5ad9190.herokuapp.com",
+]
+if DEBUG:
+    ALLOWED_HOSTS += ["localhost", "127.0.0.1"]
 
 # ─── APPLICATION DEFINITION ──────────────────────────────────────────────────
 INSTALLED_APPS = [
@@ -106,7 +112,10 @@ EMAIL_USE_TLS        = True
 DEFAULT_FROM_EMAIL   = "Finance Manager <no-reply@finance-manager.local>"
 
 # ─── OTHER SETTINGS ──────────────────────────────────────────────────────────
-CSRF_TRUSTED_ORIGINS  = ["https://*.ngrok-free.app"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://finance-wallet-709eb5ad9190.herokuapp.com",
+]
+
 PASSWORD_RESET_TIMEOUT = 15 * 60  # tokens expire after 15 minutes
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
