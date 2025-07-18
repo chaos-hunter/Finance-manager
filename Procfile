@@ -1,1 +1,1 @@
-web: gunicorn finance_manager.wsgi --log-file -
+web: gunicorn finance_manager.wsgi:application --log-file -
