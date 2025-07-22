@@ -28,15 +28,7 @@ DEBUG = True
 
 
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    # allow any subdomain of ngrok‑free.app:
-    '.ngrok-free.app',
-    # (optionally) if you want just your current tunnel:
-    '3a1a74d48ad1.ngrok-free.app',
-]
-
+ALLOWED_HOSTS = ['DavidEntonu.pythonanywhere.com']
 
 
 
