@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="form-container">
+    <h1>Activation Link Invalid</h1>
+    <p>Sorry, that activation link is invalid or has expired.</p>
+    <p>You can <a href="{% url 'signup' %}">sign up again</a> or contact support if you need help.</p>
+  </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="form-container">
+    <h1>Delete Wallet “{{ wallet.name }}”?</h1>
+    <p>This cannot be undone. Are you sure?</p>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn-delete">Yes, delete</button>
+      <a href="{% url 'wallet_detail' wallet.id %}" class="btn-cancel">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

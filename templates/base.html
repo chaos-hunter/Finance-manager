@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>{% block title %}Finance Manager{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="{% block body_class %}{% endblock %}">
+<header>
+  <nav>
+    <a href="{% url 'wallet_list' %}">My Wallets</a>
+
+    {% if user.is_authenticated %}
+      | <a href="{% url 'profile' %}">Profile</a>
+      | Hi, {{ user.username }} |
+      <form method="post"
+            action="{% url 'logout' %}"
+            style="display:inline;margin:0;padding:0;">
+        {% csrf_token %}
+        <button type="submit"
+                style="background:none;
+                       border:none;
+                       padding:0;
+                       font:inherit;
+                       color:inherit;
+                       cursor:pointer;
+                       text-decoration:underline;">
+          Logout
+        </button>
+      </form>
+    {% else %}
+      | <a href="{% url 'login' %}">Login</a>
+      | <a href="{% url 'signup' %}">Sign Up</a>
+    {% endif %}
+  </nav>
+  </header>
+
+  <main>
+    {% block content %}
+    <!-- page-specific content goes here -->
+    {% endblock %}
+  </main>
+
+  <footer>
+    &copy; 2025 David Entonu
+  </footer>
+
+  <script src="{% static 'js/main.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

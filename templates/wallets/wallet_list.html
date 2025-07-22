@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Your Wallets{% endblock %}
+
+{% block content %}
+  <header class="dashboard-header">
+    <h2>Your Wallets</h2>
+    <a href="{% url 'wallet_create' %}" class="btn-create-wallet">+ New Wallet</a>
+  </header>
+
+  <div id="walletContainer" class="wallet-grid">
+    {% for w in wallets %}
+      <a href="{% url 'wallet_detail' w.pk %}" class="wallet-card">
+        <div class="wallet-icon"></div>
+        <div class="wallet-label">{{ w.name }}</div>
+        <div class="wallet-total">Spent: ${{ w.total_spent }}</div>
+      </a>
+    {% empty %}
+      <p>You have no wallets yet. <a href="{% url 'wallet_create' %}">Create one now</a>.</p>
+    {% endfor %}
+  </div>
+{% endblock %}
