@@ -1,0 +1,7 @@
+Django==5.2.4
+gunicorn
+whitenoise
+dj-database-url
+psycopg2-binary
+python-dotenv
+reportlab>=3.6.12
