@@ -6,6 +6,8 @@
   <meta charset="UTF-8">
   <title>{% block title %}Finance Manager{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js" defer></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" defer></script>
 </head>
 <body class="{% block body_class %}{% endblock %}">
 <header>
@@ -47,7 +49,8 @@
     &copy; 2025 David Entonu
   </footer>
 
-  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/react-ui.js' %}" defer></script>
+  <script src="{% static 'js/main.js' %}" defer></script>
   {% block extra_js %}{% endblock %}
 </body>
 </html>
