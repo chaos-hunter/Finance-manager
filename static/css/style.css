@@ -43,14 +43,10 @@ header {
   margin-bottom: 1rem;
 }
 h1, h2 { font-size: 1.5rem; }
-main, .wallet-grid {
-  padding: 1rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
-  gap: 1.5rem;
-  justify-items: center;
-  margin: auto;
+main {
+  padding: 1.5rem;
 }
+
 .wallet-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -291,9 +287,10 @@ footer {
 
 /* React UI shell */
 .react-shell {
-  width: min(1100px, 100%);
+  max-width: 1200px;
+  width: min(1200px, 100%);
   margin: 1.5rem auto 2rem;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
 }
 
 .react-panel {
@@ -304,6 +301,7 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  width: 100%;
 }
 
 .react-header {
@@ -487,5 +485,31 @@ footer {
 
   .react-actions {
     flex-direction: column;
+  }
+}
+
+/* Wider layout for wallet detail */
+.react-detail {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.react-detail > .react-header { grid-area: header; }
+.react-detail > .react-summary { grid-area: summary; }
+.react-detail > .react-actions { grid-area: actions; }
+.react-detail > .react-transaction-card { grid-area: transactions; }
+
+@media (min-width: 960px) {
+  .react-detail {
+    grid-template-columns: 340px 1fr;
+    grid-template-areas:
+      "header header"
+      "summary transactions"
+      "actions transactions";
+    align-items: start;
+  }
+
+  .react-transaction-card {
+    height: 100%;
   }
 }
