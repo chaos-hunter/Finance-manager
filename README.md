@@ -41,6 +41,7 @@ Follow these steps to set up and run the project on Windows using Command Prompt
    python manage.py runserver
    ```
    Then open http://127.0.0.1:8000/ in your browser.
+   - The project already includes `127.0.0.1` and `localhost` in `ALLOWED_HOSTS` so you should not see `DisallowedHost` errors when using the default address.
 
 8. **Run tests (optional)**
    ```cmd
