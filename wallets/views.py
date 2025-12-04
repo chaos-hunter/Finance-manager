@@ -14,6 +14,7 @@ from decimal import Decimal
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
+from django.urls import reverse
 from .models import Wallet
 
 @login_required
@@ -31,7 +32,26 @@ def wallet_delete(request, pk):
 @login_required
 def wallet_list(request):
     wallets = Wallet.objects.filter(user=request.user)
-    return render(request, 'wallets/wallet_list.html', {'wallets': wallets})
+    wallet_data = [
+        {
+            "id": wallet.pk,
+            "name": wallet.name,
+            "totalSpent": float(wallet.total_spent or 0),
+            "remainingBalance": float(wallet.remaining_balance)
+            if wallet.remaining_balance is not None
+            else None,
+            "detailUrl": reverse("wallet_detail", args=[wallet.pk]),
+        }
+        for wallet in wallets
+    ]
+    return render(
+        request,
+        'wallets/wallet_list.html',
+        {
+            'wallets': wallets,
+            'wallet_data': wallet_data,
+        },
+    )
 
 @login_required
 def wallet_detail(request, pk):
@@ -43,11 +63,36 @@ def wallet_detail(request, pk):
         tx.save()
         return redirect('wallet_detail', pk=pk)
 
+    wallet_data = {
+        "id": wallet.pk,
+        "name": wallet.name,
+        "remainingBalance": float(wallet.remaining_balance)
+        if wallet.remaining_balance is not None
+        else None,
+        "totalSpent": float(wallet.total_spent or 0),
+        "transactions": [
+            {
+                "id": tx.pk,
+                "date": tx.date.strftime("%Y-%m-%d"),
+                "reason": tx.reason,
+                "amount": float(tx.amount or 0),
+            }
+            for tx in wallet.transactions.all()
+        ],
+        "actions": {
+            "addTransaction": reverse('transaction_create', args=[pk]),
+            "printStatement": reverse('wallet_statement', args=[pk]),
+            "deleteWallet": reverse('wallet_delete', args=[pk]),
+            "topUp": reverse('wallet_topup', args=[pk]),
+        },
+    }
+
     return render(request, 'wallets/wallet_detail.html', {
         'wallet': wallet,
         'tx_form': tx_form,
         'transactions': wallet.transactions.all(),
         'total': wallet.total_spent,
+        'wallet_data': wallet_data,
     })
 
 @login_required
