@@ -2,57 +2,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="wallet-detail">
-    <div class="wallet-detail-header">
-      <h2>{{ wallet.name }}</h2>
-
-      {# Optional starting balance & remaining budget #}
-      {% if wallet.remaining_balance is not None %}
-        <p>
-          <strong>Remaining:</strong>
-          ${{ wallet.remaining_balance|floatformat:2 }}
-        </p>
-
-        {% if wallet.remaining_balance <= 0 %}
-          <div class="alert alert-danger">
-            🚨 Your funds are exhausted!
-          </div>
-          <a href="{% url 'wallet_topup' wallet.id %}" class="btn-add">
-            ➕ Add Funds
-          </a>
-        {% endif %}
-      {% endif %}
-
-      {# Always show total spent #}
-      <p>
-        <strong>Total Spent:</strong>
-        ${{ total|floatformat:2 }}
-      </p>
-
-      {# Action buttons #}
-      <a href="{% url 'transaction_create' wallet.id %}" class="btn-add">
-        + Add Transaction
-      </a>
-      <a href="{% url 'wallet_statement' wallet.id %}" class="btn-add">
-        🖨️ Print Statement
-      </a>
-      <a href="{% url 'wallet_delete' wallet.id %}" class="btn-delete">
-      🗑️ Delete Wallet
-    </a>
-
-    </div>
-
-    <h3>History</h3>
-    <ul class="history-list">
-      {% for tx in transactions %}
-        <li>
-          {{ tx.date|date:"F j, Y" }} &ndash;
-          {{ tx.reason }} &ndash;
-          ${{ tx.amount|floatformat:2 }}
-        </li>
-      {% empty %}
-        <li>No transactions yet.</li>
-      {% endfor %}
-    </ul>
-  </div>
+  <div id="react-wallet-detail"
+       class="react-shell"
+       data-add-url="{% url 'transaction_create' wallet.id %}"
+       data-statement-url="{% url 'wallet_statement' wallet.id %}"
+       data-delete-url="{% url 'wallet_delete' wallet.id %}"
+       data-topup-url="{% url 'wallet_topup' wallet.id %}"></div>
+  {{ wallet_data|json_script:"wallet-detail-data" }}
 {% endblock %}
