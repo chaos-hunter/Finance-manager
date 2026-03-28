@@ -1,0 +1,42 @@
+# Python byte‑code
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Local env‑files
+.env
+
+# SQLite database
+db.sqlite3
+
+# Django static files (collected)
+staticfiles/
+
+# IDE/editor folders
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Pytest cache
+.pytest_cache/
+
+# Coverage
+.coverage
+htmlcov/
+
+# Byte‑compiled / optimized / DLL files
+*.so
+
+# Django settings (to protect sensitive info)
+finance_manager/settings.py

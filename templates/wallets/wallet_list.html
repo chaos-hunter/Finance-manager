@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Your Wallets{% endblock %}
+
+{% block content %}
+  <div class="wallet-layout-centered">
+    <h2 class="wallet-page-title">Your Wallets</h2>
+    
+    <div id="walletContainer" class="wallet-stack">
+      <!-- Always show the new wallet block at the top -->
+      <a href="{% url 'wallet_create' %}" class="btn-create-wallet" style="text-align:center; padding: 1.25rem;">+ New Wallet</a>
+
+      <!-- Existing wallets stack below -->
+      {% for w in wallets %}
+        <a href="{% url 'wallet_detail' w.pk %}" class="wallet-card">
+          <div class="wallet-icon"></div>
+          <div class="wallet-label">{{ w.name }}</div>
+          <div class="wallet-total">Spent: ${{ w.total_spent }}</div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

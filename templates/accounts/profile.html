@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+  <h2>My Profile</h2>
+
+  {% if messages %}
+    {% for msg in messages %}
+      <div class="alert">{{ msg }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    <div>
+      <label for="{{ form.username.id_for_label }}"><strong>Username</strong></label><br>
+      {{ form.username }}
+      {% if form.username.help_text %}
+        <small>{{ form.username.help_text }}</small>
+      {% endif %}
+      {% for err in form.username.errors %}
+        <div class="error">{{ err }}</div>
+      {% endfor %}
+    </div>
+
+    <div style="margin-top:1rem;">
+      <label for="{{ form.email.id_for_label }}"><strong>Email</strong></label><br>
+      {{ form.email }}
+      {% if form.email.help_text %}
+        <small>{{ form.email.help_text }}</small>
+      {% endif %}
+      {% for err in form.email.errors %}
+        <div class="error">{{ err }}</div>
+      {% endfor %}
+    </div>
+
+    <button type="submit" style="margin-top:1rem;">Update Profile</button>
+  </form>
+
+  <hr>
+
+  <p><strong>Date Joined:</strong> {{ user.date_joined|date:"F j, Y, g:i a" }}</p>
+{% endblock %}
