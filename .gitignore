@@ -39,4 +39,4 @@ htmlcov/
 *.so
 
 # Django settings (to protect sensitive info)
-finance_manager/settings.py
+# finance_manager/settings.py
